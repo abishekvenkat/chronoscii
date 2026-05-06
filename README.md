@@ -1,19 +1,15 @@
 # Chronoscii
 
-A beautiful, minimalist year progress tracker visualized through ASCII art. Watch as the year unfolds through an elegant, animated display that shows exactly how much of the year has passed.
+Year progress tracker that renders the current year as ASCII art (BlurVision style) and fills it in as the year moves forward. The art and tab title both generate from the current year at runtime, so there's nothing to update when January rolls around.
 
 ## Features
 
-- 🎨 Dynamic ASCII art visualization of year progress
-- ⌛ Real-time progress tracking
-- 📊 Precise percentage calculation
-- 📅 Days remaining counter
-- 💻 Fully responsive design
-- 🌙 Dark mode by default
+- ASCII art generated at runtime via figlet.js, no hardcoded year
+- Tab title stays in sync automatically
+- Real-time progress with percentage and days remaining
+- Dark background, responsive layout
 
 ## Development
-
-To run the project locally:
 
 ```bash
 npm install

@@ -1,26 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import figlet from 'figlet';
 import { calculateYearProgress } from '../utils/dateUtils';
 import Tooltip from './Tooltip';
 import GithubLink from './GithubLink';
 
-const ASCII_ART = `░▒▓███████▓▒░░▒▓████████▓▒░▒▓███████▓▒░░▒▓████████▓▒░ 
-       ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░        
-       ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░        
- ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓███████▓▒░  
-░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░ 
-░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░ 
-░▒▓████████▓▒░▒▓████████▓▒░▒▓████████▓▒░▒▓███████▓▒░  
-                                                      
-                                                      `;
-
 const AsciiDisplay: React.FC = () => {
+  const [asciiArt, setAsciiArt] = useState<string>('');
   const yearProgress = calculateYearProgress();
   const percentComplete = (yearProgress * 100).toFixed(1);
   const now = new Date();
 
+  useEffect(() => {
+    document.title = `${now.getFullYear()} - Chronoscii`;
+    figlet.defaults({ fontPath: '/fonts' });
+    figlet.text(String(now.getFullYear()), { font: 'BlurVision ASCII' }, (err, result) => {
+      if (!err && result) setAsciiArt(result);
+    });
+  }, []);
+
   const renderAsciiArt = () => {
-    const lines = ASCII_ART.split('\n');
-    const totalChars = ASCII_ART.replace(/\n/g, '').length;
+    const lines = asciiArt.split('\n');
+    const totalChars = asciiArt.replace(/\n/g, '').length;
     const coloredChars = Math.floor(totalChars * yearProgress);
     let charCount = 0;
 
